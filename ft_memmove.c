@@ -6,31 +6,36 @@
 /*   By: mokhames <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 15:40:37 by mokhames          #+#    #+#             */
-/*   Updated: 2019/10/22 17:50:37 by mokhames         ###   ########.fr       */
+/*   Updated: 2019/10/27 19:05:55 by mokhames         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+#include "libft.h"
+
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	char	*dst_1;
-	char	*src_1;
+	char		*d;
+	const char	*s;
 
-	dst_1 = (char *)dst;
-	src_1 = (char *)src;
-	if (dst_1 == src_1)
-		return (dst);
-	if (src_1 < dst_1)
+	d = dest;
+	s = src;
+	if (d == '\0' && s == '\0')
+		return (NULL);
+	if (ft_memcmp(d, s, len) == 0)
+		return (dest);
+	if (s < d && d < s + len)
 	{
-		src_1 = (char *)src + len - 1;
-		dst_1 = (char *)dst + len - 1;
+		s = s + len;
+		d = d + len;
 		while (len--)
-			*dst_1-- = *src_1--;
+			*--d = *--s;
 	}
 	else
+	{
 		while (len--)
-			*dst_1++ = *src_1++;
-	return (dst);
+			*d++ = *s++;
+	}
+	return (dest);
 }
